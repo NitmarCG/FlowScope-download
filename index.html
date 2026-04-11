@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowScope — Скачать</title>
+    <meta name="description" content="Скачайте FlowScope для Windows: EXE и MSI установщики." />
+    <style>
+      :root {
+        --bg: #06122a;
+        --panel: #0d1d3c;
+        --panel-2: #10254a;
+        --text: #f2f6ff;
+        --muted: #9db2d8;
+        --accent: #4a8fff;
+        --accent-2: #2f6fe0;
+        --border: rgba(255, 255, 255, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Inter", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(1200px 500px at 10% -10%, #17376f 0%, transparent 60%),
+          radial-gradient(1000px 400px at 100% 0%, #112e5f 0%, transparent 55%),
+          var(--bg);
+      }
+      .wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 48px; }
+      .hero {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(18,40,79,.9), rgba(12,27,56,.92));
+        padding: 24px;
+      }
+      .brand { display: flex; gap: 14px; align-items: center; }
+      .brand img { width: 46px; height: 46px; border-radius: 12px; }
+      h1 { margin: 0; font-size: 32px; line-height: 1.1; }
+      .sub { margin: 8px 0 0; color: var(--muted); font-size: 15px; max-width: 700px; }
+      .actions { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 11px 16px;
+        color: var(--text);
+        background: rgba(255,255,255,.05);
+        font-weight: 600;
+      }
+      .btn.primary {
+        background: linear-gradient(180deg, var(--accent), var(--accent-2));
+        border-color: transparent;
+      }
+      .note {
+        margin-top: 14px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 204, 107, 0.45);
+        background: rgba(255, 187, 74, 0.1);
+        color: #ffdca2;
+        font-size: 14px;
+      }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+      .card { border: 1px solid var(--border); border-radius: 14px; background: rgba(255,255,255,.03); overflow: hidden; }
+      .card img { width: 100%; height: auto; display: block; }
+      .card p { margin: 0; padding: 10px 12px; color: var(--muted); font-size: 13px; }
+      .links { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+      .links a { color: #b7cbf2; text-decoration: none; border-bottom: 1px dashed rgba(183,203,242,.6); }
+      footer { margin-top: 20px; color: #7f98c6; font-size: 12px; }
+      @media (max-width: 760px) {
+        h1 { font-size: 28px; }
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <div class="brand">
+          <img src="assets/flowscope-logo.png" alt="FlowScope" />
+          <div>
+            <h1>FlowScope</h1>
+            <p class="sub">Утилита анализа сетевых назначений. Скачайте установщик для Windows и начните профилирование трафика.</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/NitmarCG/FlowScope-download/releases/latest/download/FlowScope_0.1.0_x64-setup.exe">Скачать EXE</a>
+          <a class="btn" href="https://github.com/NitmarCG/FlowScope-download/releases/latest/download/FlowScope_0.1.0_x64_en-US.msi">Скачать MSI</a>
+          <a class="btn" href="https://github.com/NitmarCG/FlowScope-download/releases/latest">Все релизы</a>
+        </div>
+
+        <p class="note">Для рабочего режима с WinDivert запускайте приложение от имени администратора.</p>
+
+        <div class="grid">
+          <article class="card">
+            <img src="assets/capture-selection.png" alt="Выбор цели" />
+            <p>Выбор цели профилирования</p>
+          </article>
+          <article class="card">
+            <img src="assets/capture-analysis.png" alt="Анализ результатов" />
+            <p>Анализ результатов и кандидатов</p>
+          </article>
+        </div>
+
+        <div class="links">
+          <a href="https://rustore.ru/catalog/app/com.flowscope.app">Android в RuStore</a>
+          <a href="https://t.me/+hb-DRDCPfUNiZWQy">Telegram-сообщество</a>
+          <a href="https://netmonet.co/tip/593087?o=6">Поддержать проект</a>
+        </div>
+      </section>
+      <footer>© FlowScope</footer>
+    </main>
+  </body>
+</html>
