@@ -65,11 +65,59 @@
       }
       .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
       .card { border: 1px solid var(--border); border-radius: 14px; background: rgba(255,255,255,.03); overflow: hidden; }
+      .screenshot-trigger {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background: transparent;
+        cursor: zoom-in;
+      }
       .card img { width: 100%; height: auto; display: block; }
       .card p { margin: 0; padding: 10px 12px; color: var(--muted); font-size: 13px; }
+      .card .hint {
+        margin: 0;
+        padding: 0 12px 10px;
+        color: #7f98c6;
+        font-size: 11px;
+      }
       .links { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
       .links a { color: #b7cbf2; text-decoration: none; border-bottom: 1px dashed rgba(183,203,242,.6); }
       footer { margin-top: 20px; color: #7f98c6; font-size: 12px; }
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        background: rgba(4, 10, 24, 0.92);
+        backdrop-filter: blur(2px);
+      }
+      .lightbox.open { display: flex; }
+      .lightbox img {
+        max-width: min(96vw, 1700px);
+        max-height: 92vh;
+        width: auto;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7);
+      }
+      .lightbox-close {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+      }
       @media (max-width: 760px) {
         h1 { font-size: 28px; }
         .grid { grid-template-columns: 1fr; }
@@ -97,12 +145,18 @@
 
         <div class="grid">
           <article class="card">
-            <img src="assets/capture-selection.png" alt="Выбор цели" />
+            <button class="screenshot-trigger" type="button" data-fullsrc="assets/capture-selection.png" data-alt="Выбор цели">
+              <img src="assets/capture-selection.png" alt="Выбор цели" />
+            </button>
             <p>Выбор цели профилирования</p>
+            <p class="hint">Нажмите, чтобы открыть на весь экран</p>
           </article>
           <article class="card">
-            <img src="assets/capture-analysis.png" alt="Анализ результатов" />
+            <button class="screenshot-trigger" type="button" data-fullsrc="assets/capture-analysis.png" data-alt="Анализ результатов">
+              <img src="assets/capture-analysis.png" alt="Анализ результатов" />
+            </button>
             <p>Анализ результатов и кандидатов</p>
+            <p class="hint">Нажмите, чтобы открыть на весь экран</p>
           </article>
         </div>
 
@@ -114,5 +168,48 @@
       </section>
       <footer>© FlowScope</footer>
     </main>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Закрыть полноэкранный просмотр">×</button>
+      <img id="lightboxImage" src="" alt="" />
+    </div>
+
+    <script>
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxClose = document.getElementById("lightboxClose");
+      const triggers = document.querySelectorAll(".screenshot-trigger");
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImage.src = "";
+        lightboxImage.alt = "";
+      }
+
+      triggers.forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+          const src = trigger.dataset.fullsrc;
+          const alt = trigger.dataset.alt || "Скриншот";
+          if (!src) return;
+          lightboxImage.src = src;
+          lightboxImage.alt = alt;
+          lightbox.classList.add("open");
+          lightbox.setAttribute("aria-hidden", "false");
+        });
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && lightbox.classList.contains("open")) {
+          closeLightbox();
+        }
+      });
+    </script>
   </body>
 </html>
